@@ -21,4 +21,9 @@ app.use(cookieParser());
 //========= Middlewares for Media (🙄) =======
 app.use(express.static("public"));
 
+// =============== student route ================
+import studentRoute from "./routes/student.route.js";
+
+app.use("/student", studentRoute);
+
 export { app };
