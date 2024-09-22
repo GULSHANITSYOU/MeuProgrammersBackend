@@ -24,6 +24,6 @@ app.use(express.static("public"));
 // =============== student route ================
 import studentRoute from "./routes/student.route.js";
 
-app.use("/student", studentRoute);
+app.use("/api/v1/student", studentRoute);
 
 export { app };
