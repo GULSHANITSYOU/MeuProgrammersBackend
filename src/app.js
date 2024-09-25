@@ -26,4 +26,10 @@ import studentRoute from "./routes/student.route.js";
 
 app.use("/api/v1/student", studentRoute);
 
+// ================= password reset api ================
+import password from "./routes/password.route.js";
+
+app.use("/api/v1/password", password);
+
+
 export { app };
