@@ -31,5 +31,9 @@ import password from "./routes/password.route.js";
 
 app.use("/api/v1/password", password);
 
+//================== profile update api ================
+import profileRoute from "./routes/profile.updates.route.js";
+
+app.use("/api/v1/profile", profileRoute);
 
 export { app };
