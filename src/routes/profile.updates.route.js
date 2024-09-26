@@ -7,10 +7,6 @@ const profileRoute = Router();
 // update profile api
 profileRoute
   .route("/update/personal-details")
-  .patch(
-    verifyToken,
-    upload.single("profileImage"),
-    handelPersonalDetailsUpdate
-  );
+  .patch(verifyToken, handelPersonalDetailsUpdate);
 
 export default profileRoute;
