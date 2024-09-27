@@ -36,4 +36,8 @@ import profileRoute from "./routes/profile.updates.route.js";
 
 app.use("/api/v1/profile", profileRoute);
 
+//=====education update api =============
+import educationRoute from "./routes/education.update.route.js";
+app.use("/api/v1/education", educationRoute);
+
 export { app };
