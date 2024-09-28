@@ -3,6 +3,7 @@ import {
   handelPersonalDetailsUpdate,
   handelProfileImageUpdate,
   hadelUpdatingSkills,
+  handleNewExperienceadd,
 } from "../controllers/profile.updates.controller.js";
 import { verifyToken } from "../middlewares/auth.middelware.js";
 import { upload } from "../middlewares/multer.middelware.js";
@@ -20,5 +21,10 @@ profileRoute
 
 // adding skills
 profileRoute.route("/update/skills").patch(verifyToken, hadelUpdatingSkills);
+
+// adding Experience //
+profileRoute
+  .route("/add/new-Experience")
+  .post(verifyToken, handleNewExperienceadd);
 
 export default profileRoute;
