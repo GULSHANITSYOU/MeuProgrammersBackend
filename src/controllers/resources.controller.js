@@ -84,4 +84,76 @@ const handelResourcesAdd = asyncHandler(async (req, res) => {
   );
 });
 
-export { handelResourcesAdd };
+// find the resource
+
+const handelGetResources = asyncHandler(async (req, res) => {
+  let { courseName, year, sem, subjectName, resourceType } = req.body;
+
+  // Validate the required fields
+  if (!courseName || !year || !sem || !subjectName || !resourceType) {
+    throw new apiError("fail", 400, "All fields are required");
+  }
+
+  year = Number(year);
+  sem = Number(sem);
+
+  // Perform aggregation to search for matching resources
+  const searchResult = await Resource.aggregate([
+    {
+      $match: {
+        courseName,
+        year,
+        sem,
+        subjectName,
+        resourceType,
+      },
+    },
+    {
+      $lookup: {
+        from: "students",
+        localField: "owner",
+        foreignField: "_id",
+        as: "student",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        courseName: 1,
+        year: 1,
+        sem: 1,
+        subjectName: 1,
+        resourceType: 1,
+        aboutResource: 1,
+        resourceLink: 1,
+        previewImages: 1,
+        owner: 1,
+        student: {
+          _id: 1,
+          firstName: 1, // Corrected typo from "fistName" to "firstName"
+          lastName: 1,
+          profileImage: 1,
+        },
+      },
+    },
+  ]);
+
+  // Check if no resources were found
+  if (searchResult.length === 0) {
+    throw new apiError("fail", 404, "No resources found matching the criteria");
+  }
+
+  // Return the found resources
+  return res
+    .status(200)
+    .json(
+      new apiResponse(
+        "success",
+        200,
+        searchResult,
+        "Resources fetched successfully"
+      )
+    );
+});
+
+export { handelResourcesAdd, handelGetResources };
