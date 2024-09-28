@@ -48,4 +48,10 @@ import resourceRoute from "./routes/resources.route.js";
 
 app.use("/api/v1/resources", resourceRoute);
 
+//==============project api ===========
+
+import projectRoute from "./routes/project.route.js";
+
+app.use("/api/v1/project", projectRoute);
+
 export { app };
