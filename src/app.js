@@ -54,4 +54,9 @@ import projectRoute from "./routes/project.route.js";
 
 app.use("/api/v1/project", projectRoute);
 
+//================ socialMedia , codingProfile links===============
+import socialCodingLinksRoute from "./routes/social.coding.links.route.js";
+
+app.use("/api/v1/social-Coding-Links" , socialCodingLinksRoute)
+
 export { app };
