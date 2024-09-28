@@ -15,8 +15,14 @@ const handelResetnewPassword = asyncHandler(async (req, res) => {
     throw new apiError("fail", 401, "Token is required");
   }
 
-  // Verify token
-  const decoded = jwt.verify(token, process.env.PASSWORD_RESET_TOKEN_SECRET);
+  let decoded;
+  try {
+    // Verify token
+    decoded = jwt.verify(token, process.env.PASSWORD_RESET_TOKEN_SECRET);
+  } catch (error) {
+    if (error.massege === "TokenExpiredError");
+    throw new apiError("fail", 401, "Tokken has expired!");
+  }
 
   if (!decoded) {
     throw new apiError("fail", 401, "Invalid token");
