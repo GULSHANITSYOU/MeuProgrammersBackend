@@ -1,6 +1,7 @@
 import { asyncHandler } from "../utils/async.handler.js";
 import { apiResponse } from "../utils/api.response.js";
 import { apiError } from "../utils/api.error.js";
+import { Student } from "../models/student.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const handelPersonalDetailsUpdate = asyncHandler(async (req, res) => {
@@ -62,4 +63,36 @@ const handelProfileImageUpdate = asyncHandler(async (req, res) => {
   );
 });
 
-export { handelPersonalDetailsUpdate, handelProfileImageUpdate };
+const hadelUpdatingSkills = asyncHandler(async (req, res) => {
+  const updateskills = await Student.findByIdAndUpdate(
+    req.student.id,
+    {
+      skills: req.body,
+    },
+    { runValidators: true, new: true }
+  );
+
+  if (!updateskills) {
+    throw new apiError("fail", 500, "can not update skills");
+  }
+
+  return res.status(200).json(
+    new apiResponse(
+      "success",
+      200,
+      {
+        _id: updateskills._id,
+        skills: updateskills.skills,
+        firstName: updateskills.firstName,
+        lastName: updateskills.lastName,
+      },
+      "Skills updated successfully"
+    )
+  );
+});
+
+export {
+  handelPersonalDetailsUpdate,
+  handelProfileImageUpdate,
+  hadelUpdatingSkills,
+};
