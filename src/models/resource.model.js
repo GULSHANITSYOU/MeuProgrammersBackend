@@ -27,6 +27,15 @@ const resourceSchema = new mongoose.Schema({
     required: true,
     enum: ["Notes", "PYQ's"],
   },
+  aboutResource: {
+    type: String,
+    required: true,
+  },
+  previewImages: [
+    {
+      type: String,
+    },
+  ],
   resourceLink: {
     type: String,
     required: true,
