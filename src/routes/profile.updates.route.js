@@ -4,6 +4,7 @@ import {
   handelProfileImageUpdate,
   hadelUpdatingSkills,
   handleNewExperienceadd,
+  handleUpdateExperience,
 } from "../controllers/profile.updates.controller.js";
 import { verifyToken } from "../middlewares/auth.middelware.js";
 import { upload } from "../middlewares/multer.middelware.js";
@@ -26,5 +27,10 @@ profileRoute.route("/update/skills").patch(verifyToken, hadelUpdatingSkills);
 profileRoute
   .route("/add/new-Experience")
   .post(verifyToken, handleNewExperienceadd);
+
+// update experience api
+profileRoute
+  .route("/update/experience/:experienceId")
+  .patch(verifyToken, handleUpdateExperience);
 
 export default profileRoute;
