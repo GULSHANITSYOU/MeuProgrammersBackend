@@ -1,4 +1,4 @@
----
+
 # `MeuProgrammersBackend`
 
 [<img src="https://img.icons8.com/?size=512&id=55494&format=png" align="right" width="25%">](https://github.com/GULSHANITSYOU/MeuProgrammersBackend)
@@ -180,4 +180,3 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 - **Express** framework for enabling RESTful API development.
 - **MongoDB** for database management.
   
----
