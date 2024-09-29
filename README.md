@@ -1,7 +1,4 @@
-I've reviewed the structure of your project and will draft a README based on the information provided.
-
 ---
-
 # `MeuProgrammersBackend`
 
 [<img src="https://img.icons8.com/?size=512&id=55494&format=png" align="right" width="25%">](https://github.com/GULSHANITSYOU/MeuProgrammersBackend)
@@ -184,5 +181,3 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 - **MongoDB** for database management.
   
 ---
-
-Feel free to adjust the README further based on additional details or preferences for your project!
