@@ -148,9 +148,58 @@ const handleNewExperienceadd = asyncHandler(async (req, res) => {
     );
 });
 
+const handleUpdateExperience = asyncHandler(async (req, res) => {
+  const student = req.student;
+  const experienceId = req.params.experienceId;
+
+  const {
+    positionName,
+    organisationName,
+    positionType,
+    startingDate,
+    endingDate,
+    isCurrentPosition,
+    positionDescription,
+  } = req.body;
+
+  if (!experienceId) {
+    throw new apiError("fail", 400, "experienceId is required");
+  }
+
+  const updatedExperience = await Experience.findByIdAndUpdate(
+    experienceId,
+    {
+      positionName: positionName,
+      organisationName: organisationName,
+      positionType: positionType,
+      startingDate: startingDate,
+      endingDate: endingDate || null,
+      isCurrentPosition: isCurrentPosition,
+      positionDescription: positionDescription || null,
+    },
+    { runValidators: true, new: true }
+  );
+
+  if (!updatedExperience) {
+    throw new apiError("fail", 500, "error while updating  experience ");
+  }
+
+  return res
+    .status(201)
+    .json(
+      new apiResponse(
+        "success",
+        201,
+        updatedExperience,
+        "Experience updated successfully"
+      )
+    );
+});
+
 export {
   handelPersonalDetailsUpdate,
   handelProfileImageUpdate,
   hadelUpdatingSkills,
   handleNewExperienceadd,
+  handleUpdateExperience,
 };
