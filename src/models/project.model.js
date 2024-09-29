@@ -13,6 +13,7 @@ const projectSchema = new Schema({
   },
   projectDescription: {
     type: String,
+    required: true,
   },
   projectVisitUrl: {
     type: String,
