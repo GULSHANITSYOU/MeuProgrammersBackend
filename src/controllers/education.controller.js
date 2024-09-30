@@ -49,7 +49,7 @@ const handelEducationUpdate = asyncHandler(async (req, res) => {
     throw new apiError("fail", 400, "All fields are required");
   }
   if (!educationId) {
-    throw new apiError("fail", 400, "experienceId is required");
+    throw new apiError("fail", 400, "educationId is required");
   }
 
   const updatedEducation = await Education.findByIdAndUpdate(
