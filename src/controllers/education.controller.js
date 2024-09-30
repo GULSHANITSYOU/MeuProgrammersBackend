@@ -45,6 +45,9 @@ const handelEducationUpdate = asyncHandler(async (req, res) => {
   const student = req.student;
   const educationId = req.params.educationId;
   const { courseName, branch, startDate, endDate } = req.body;
+  if (!courseName || !branch || !startDate || !endDate) {
+    throw new apiError("fail", 400, "All fields are required");
+  }
   if (!educationId) {
     throw new apiError("fail", 400, "experienceId is required");
   }
@@ -59,11 +62,9 @@ const handelEducationUpdate = asyncHandler(async (req, res) => {
     },
     { new: true }
   );
-  if (!courseName || !branch || !startDate || !endDate) {
-    throw new apiError("fail", 400, "All fields are required");
-  }
+
   if (!updatedEducation) {
-    throw new apiError("fail", 500, "error while updating  experience ");
+    throw new apiError("fail", 500, "error while updating  education ");
   }
 
   return res
