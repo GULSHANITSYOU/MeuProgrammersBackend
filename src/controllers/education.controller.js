@@ -41,4 +41,41 @@ const handelEducationAdd = asyncHandler(async (req, res) => {
     );
 });
 
-export { handelEducationAdd };
+const handelEducationUpdate = asyncHandler(async (req, res) => {
+  const student = req.student;
+  const educationId = req.params.educationId;
+  const { courseName, branch, startDate, endDate } = req.body;
+  if (!courseName || !branch || !startDate || !endDate) {
+    throw new apiError("fail", 400, "All fields are required");
+  }
+  if (!educationId) {
+    throw new apiError("fail", 400, "educationId is required");
+  }
+
+  const updatedEducation = await Education.findByIdAndUpdate(
+    educationId,
+    {
+      courseName: courseName,
+      branch: branch,
+      startDate: startDate,
+      endDate: endDate,
+    },
+    { new: true }
+  );
+
+  if (!updatedEducation) {
+    throw new apiError("fail", 500, "error while updating  education ");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new apiResponse(
+        "success",
+        200,
+        updatedEducation,
+        "Education updated successfully"
+      )
+    );
+});
+export { handelEducationAdd, handelEducationUpdate };
